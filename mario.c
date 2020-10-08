@@ -3,19 +3,18 @@
 
 int main(void)
 {
-   //prompt user for height until positive integer between 1 and 8
-   do
-   {
-       int height = get_int("Height: ");
-
-   }
+    //prompt user for height until positive integer between 1 and 8
+    do
+    {
+        int height = get_int("Height: ");
+        }
     while (height < 1 || height > 8);
 
     //print triangle
     for (int r = 0; r < height; r++)
     {
         //print spaces before triangle
-        for(int sp = 0; sp < height - r - 1; sp++)
+        for (int sp = 0; sp < height - r - 1; sp++)
         {
             printf(" ");
         }
