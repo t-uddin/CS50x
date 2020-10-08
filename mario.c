@@ -4,9 +4,10 @@
 int main(void)
 {
     //prompt user for height until positive integer between 1 and 8
+    int height;
     do
     {
-        int height = get_int("Height: ");
+        height = get_int("Height: ");
     }
     while (height < 1 || height > 8);
 
