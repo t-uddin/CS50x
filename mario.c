@@ -7,7 +7,7 @@ int main(void)
     do
     {
         int height = get_int("Height: ");
-        }
+    }
     while (height < 1 || height > 8);
 
     //print triangle
