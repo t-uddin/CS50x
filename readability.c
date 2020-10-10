@@ -17,16 +17,22 @@ int main(void)
     for (int i = 0, n = strlen(text); i < n; i++)
     { 
         //letters
-        if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z' ))
-        letters++;
+        if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z'))
+        {
+            letters++;
+        }
         
         //words
         else if (text[i] == ' ')
-        words++;
+        {
+            words++;
+        }
         
         //sentences
         else if (text[i] == '.' || text[i] == '?' || text [i] == '!')
-        sentences++;
+        {
+            sentences++;
+        }
     }
     
     //printf("%i letter(s)\n%i word(s)\n%i sentence(s)\n", letters, words, sentences);
@@ -46,7 +52,7 @@ int main(void)
         printf("Grade 16+\n");
     }
     
-    else if (grade <1)
+    else if (grade < 1)
     {
         printf("Before Grade 1\n");
     }
