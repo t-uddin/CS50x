@@ -18,28 +18,24 @@ int main(void)
     //Print minimum number of coins to return
     int coins = 0;
 
-    for (int quarters = 0; cents >= 25; quarters++)
+    for (int quarters = 0; cents >= 25; coins++)
     {
-        cents -= 25;
-        coins++;
+        cents = cents - 25;
     }
 
-    for (int dimes = 0; cents >=10; dimes++)
+    for (int dimes = 0; cents >=10; coins++)
     {
-        cents -= 10;
-        coins++;
+        cents = cents - 10;
     }
 
-    for (int nickels = 0; cents>=5; nickels++)
+    for (int nickels = 0; cents>=5; coins++)
     {
-        cents -= 5;
-        coins++;
+        cents = cents - 5;
     }
 
-    for (int dimes = 0; cents>=1; dimes++)
+    for (int dimes = 0; cents>=1; coins++)
     {
-        cents -= 1;
-        coins++;
+        cents = cents - 1;
     }
 
     printf("%i\n", coins);
