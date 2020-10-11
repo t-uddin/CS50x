@@ -42,7 +42,7 @@ int main(int argc, string argv[])
 
 
     //Convert plain text to cypher text character by character
-    printf("cyphertext: ");
+    printf("ciphertext: ");
     int n = strlen(text);
 
     for (int i = 0; i < n; i++)
