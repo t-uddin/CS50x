@@ -20,22 +20,22 @@ int main(int argc, string argv[])
     //Iterate over provided argument to check each character is a digit
     bool key_valid = true;
     int len = strlen(argv[1]);
-    for(int i = 0; i < len; i++)
+    for (int i = 0; i < len; i++)
+    {
+        if (isdigit(argv[1][i]) == false)
         {
-            if (isdigit(argv[1][i]) == false)
-            {
-                printf("Usage: ./caesar key\n");
-                key_valid = false;
-                return 1;
-            }
+            printf("Usage: ./caesar key\n");
+            key_valid = false;
+            return 1;
         }
+    }
 
     //If key valid, convert command-line argument to integer and prompt user for plain text
     int key = 0;
     if (key_valid == true)
-            {
-                key = atoi(argv[1]);
-            }
+    {
+        key = atoi(argv[1]);
+    }
 
     //prompt user for plain text
     string text = get_string("plaintext: ");
