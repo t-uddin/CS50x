@@ -95,7 +95,7 @@ void print_winner(void)
     }
 
     //Print names with highest vote number
-    for(int j = 0; j < candidate_count; j++)
+    for (int j = 0; j < candidate_count; j++)
     {
         if (candidates[j].votes == winning_vote)
         {
