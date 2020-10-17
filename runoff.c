@@ -157,7 +157,8 @@ void tabulate(void)
     {
         bool found = false;
         while (found == false)
-        {   for (int m = 0; m < candidate_count; m++)
+        {   
+            for (int m = 0; m < candidate_count; m++)
             {
                 if (candidates[preferences[l][m]].eliminated == false)
                 {
@@ -211,7 +212,7 @@ int find_min(void)
         }
     }
 
-    return 0;
+    return min;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
