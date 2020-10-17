@@ -131,14 +131,14 @@ int main(int argc, string argv[])
 bool vote(int voter, int rank, string name)
 {
     //for each voter[i] (iterate)
-     //for each rank[j] (iterate)
-      // if name = one in array (iterate over candidates + stcmp)
-        //update preferences for voter [i] with that candidates array number  in rank [j]
-        //return true
-      //else if no candidate found
+    //for each rank[j] (iterate)
+    // if name = one in array (iterate over candidates + stcmp)
+    //update preferences for voter [i] with that candidates array number  in rank [j]
+    //return true
+    //else if no candidate found
 
 
-    for(int k = 0; k < candidate_count; k++)
+    for (int k = 0; k < candidate_count; k++)
     {
         if (strcmp(name, candidates[k].name) == 0)
         {
@@ -152,12 +152,12 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    
+
     for (int l = 0; l < voter_count; l++)
     {
         bool found = false;
         while (found == false)
-        {   
+        {
             for (int m = 0; m < candidate_count; m++)
             {
                 if (candidates[preferences[l][m]].eliminated == false)
@@ -182,7 +182,7 @@ bool print_winner(void)
 
     for (int n = 0; n < candidate_count; n++)
     {
-        if (candidates[n].votes > (voter_count/2))
+        if (candidates[n].votes > (voter_count / 2))
         {
             string stdout = candidates[n].name;
             printf("%s\n", stdout);
@@ -190,7 +190,7 @@ bool print_winner(void)
         }
     }
 
-     return false;
+    return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
@@ -200,7 +200,7 @@ int find_min(void)
     //if candidate[i].eliminated = false
 
     int min = MAX_VOTERS + 1;
-    
+
     for (int o = 1; o < candidate_count; o++)
     {
         if (candidates[o].eliminated == false)
@@ -226,9 +226,9 @@ bool is_tie(int min)
     for (int p = 0; p < candidate_count; p++)
     {
         if ((candidates[p].eliminated == false) && (candidates[p].votes != min))
-            {
-                return false;
-            }
+        {
+            return false;
+        }
     }
 
     return true;
