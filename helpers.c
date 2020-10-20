@@ -11,7 +11,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             //Average the colour values of that pixel and round to int
-            int avg = round((image[i][j].rgbtRed + image[i][j].rgbtBlue + image[i][j].rgbtGreen) / 3);
+            int avg = round((image[i][j].rgbtRed + image[i][j].rgbtBlue + image[i][j].rgbtGreen) / 3.0);
 
             image[i][j].rgbtRed = avg;
             image[i][j].rgbtGreen = avg;
@@ -97,12 +97,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < height; j++)
         {
             //Sum r, g and b values for pixels within 1 row/column of pixel[i][j]
-            for (int k = -1; k < 1; k++)
+            for (int k = -1; k < 2; k++)
             {
-                for (int l = -1; l <1; l++)
+                for (int l = -1; l < 2; l++)
                 {
                     //Only sum if adress is of a pixel within picture for edges/corners
-                    if(i + l > -1 && j + k > -1)
+                    if((i + l) > -1 && (i + l) < height && (j + k)  > -1 && (j+k) < width)
                     {
                         sumRed = sumRed + image[i + l][j + k].rgbtRed;
                         sumBlue = sumBlue + image[i + l][j + k].rgbtBlue;
