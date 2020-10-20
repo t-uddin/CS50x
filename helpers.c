@@ -23,7 +23,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 // Convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
-       //Iterate over every row
+    //Iterate over every row
     for (int i = 0; i < height; i++)
     {
         //iterate over every pixel in row
@@ -51,7 +51,7 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
                 sepiaBlue = 255;
             }
 
-        //Apply new sepia RGB values to RGB values, capping at 255
+            //Apply new sepia RGB values to RGB values, capping at 255
             image[i][j].rgbtRed = sepiaRed;
             image[i][j].rgbtGreen = sepiaGreen;
             image[i][j].rgbtBlue = sepiaBlue;
@@ -66,16 +66,16 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
     //Iterate over each row
-     for (int i = 0; i < height; i++)
-     {
-         //Iterate over ever pixel and change it's adress from left to right side of image
-         for (int j = 0; j < width / 2; j++)
-         {
-           RGBTRIPLE temp = image[i][j];
-           image[i][j] = image[i][width - j - 1];
-           image[i][width - j - 1] = temp;
+    for (int i = 0; i < height; i++)
+    {
+        //Iterate over ever pixel and change it's adress from left to right side of image
+        for (int j = 0; j < width / 2; j++)
+        {
+            RGBTRIPLE temp = image[i][j];
+            image[i][j] = image[i][width - j - 1];
+            image[i][width - j - 1] = temp;
         }
-     }
+    }
     return;
 }
 
@@ -94,7 +94,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     for (int i = 0; i < height; i++)
     {
         //Iterate over each pixel within row
-        for (int j = 0; j < height; j++)
+        for (int j = 0; j < width; j++)
         {
             //Sum r, g and b values for pixels within 1 row/column of pixel[i][j]
             for (int k = -1; k < 2; k++)
@@ -102,7 +102,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 for (int l = -1; l < 2; l++)
                 {
                     //Only sum if adress is of a pixel within picture for edges/corners
-                    if((i + l) > -1 && (i + l) < height && (j + k)  > -1 && (j+k) < width)
+                    if ((i + l) > -1 && (i + l) < height && (j + k)  > -1 && (j + k) < width)
                     {
                         sumRed = sumRed + image[i + l][j + k].rgbtRed;
                         sumBlue = sumBlue + image[i + l][j + k].rgbtBlue;
@@ -113,10 +113,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-        //Apply average colours to that pixel in temp picture
-        temp[i][j].rgbtRed = round(sumRed / counter);
-        temp[i][j].rgbtGreen = round(sumGreen / counter);
-        temp[i][j].rgbtBlue = round(sumBlue / counter);
+            //Apply average colours to that pixel in temp picture
+            temp[i][j].rgbtRed = round(sumRed / counter);
+            temp[i][j].rgbtGreen = round(sumGreen / counter);
+            temp[i][j].rgbtBlue = round(sumBlue / counter);
 
         }
     }
