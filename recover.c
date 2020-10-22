@@ -58,20 +58,20 @@ int main(int argc, char *argv[])
                 free(buffer);
                 return 3;
             }
-            else
-            {
-                //Write jpeg into the new file
-                fwrite(buffer, 512, 1, recovered_image);
-            }
+            //else
+            //{
+            //    //Write jpeg into the new file
+            //    fwrite(buffer, 512, 1, recovered_image);
+            //}
 
             count++;
 
         }
 
-        else
-        {
+        //else
+        //{
             fwrite(buffer, 512, 1, recovered_image);
-        }
+        //}
 
     }
 
