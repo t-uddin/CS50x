@@ -7,13 +7,13 @@ int main(int argc, char *argv[])
     //Ensure valid input
     if (argc != 2)
     {
-        printf("Usage: ./recover image\n");
+        fprintf(stderr, "Usage: ./recover image\n");
         return 1;
     }
 
     //Open input file
     FILE *memory = fopen(argv[1], "r");
-    if (argv[1] == NULL)
+    if (memory == NULL)
     {
         fprintf(stderr, "Could not open %s.\n", argv[1]);
         return 1;
@@ -38,7 +38,10 @@ int main(int argc, char *argv[])
 
         //If found, open new JPEG file and keep writing data to file in 512 byte chunks until next JPEG found
 
-        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
+        if (buffer[0] == 0xff &&
+            buffer[1] == 0xd8 &&
+            buffer[2] == 0xff &&
+            (buffer[3] & 0xf0) == 0xe0)
         {
             //Close current jpeg file if exists
             if (count > 0)
@@ -55,28 +58,31 @@ int main(int argc, char *argv[])
 
             if (recovered_image == NULL)
             {
+                fclose(memory);
                 free(buffer);
                 return 3;
             }
-            //else
-            //{
-            //    //Write jpeg into the new file
-            //    fwrite(buffer, 512, 1, recovered_image);
-            //}
+
+            //Write jpeg into the new file
+            fwrite(&buffer, 512, 1, recovered_image);
 
             count++;
 
         }
 
-        //else
-        //{
-            fwrite(buffer, 512, 1, recovered_image);
-        //}
+        else
+        {
+            //continue;
+            fread(buffer, 512, 1, memory);
+        }
+
 
     }
 
-    //Close input file and free memory
+    //Close files and free memory
     fclose(memory);
+    fclose(recovered_image);
     free(buffer);
+    return 0;
 
 }
