@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-typedef uint8_t BYTE;
-
 
 int main(int argc, char *argv[])
 {
@@ -27,10 +24,10 @@ int main(int argc, char *argv[])
     int count = 0;
 
     //Declare filenam variable - ensure enough memory/characters for full name
-    char *filename = malloc(8);
+    char filename[8];
 
     //Create buffer and allocate memory
-    BYTE buffer[251];
+    unsigned char *buffer = malloc(512);
 
     //Declare image variable where new jpegs are written to
     FILE *recovered_image;
@@ -64,27 +61,24 @@ int main(int argc, char *argv[])
             if (recovered_image == NULL)
             {
                 fclose(memory);
-                free(filename);
                 return 3;
             }
 
             //Write jpeg into the new file
-            fwrite(buffer, 512, 1, recovered_image);
+            //fwrite(buffer, 512, 1, recovered_image);
 
             count++;
 
         }
 
-        if (count > 0)
-        {
-            fwrite(buffer, 512, 1, recovered_image);
-        }
+
+        fwrite(buffer, 512, 1, recovered_image);
     }
 
     //Close files and free memory
     fclose(memory);
     //fclose(recovered_image);
-    free(filename);
+    free(buffer);
     return 0;
 
 }
