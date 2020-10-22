@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+typedef uint8_t BYTE;
+
 
 int main(int argc, char *argv[])
 {
@@ -24,13 +27,13 @@ int main(int argc, char *argv[])
     int count = 0;
 
     //Declare filenam variable - ensure enough memory/characters for full name
-    char filename[7];
+    char *filename = malloc(8);
 
     //Create buffer and allocate memory
-    unsigned char *buffer = malloc(251);
+    BYTE buffer[251];
 
     //Declare image variable where new jpegs are written to
-    FILE *recovered_image = NULL;
+    FILE *recovered_image;
 
     //Scan file for beginning of a JPEG, iterate in bytes of 512
     while (fread(buffer, 512, 1, memory))
@@ -42,6 +45,7 @@ int main(int argc, char *argv[])
             buffer[1] == 0xd8 &&
             buffer[2] == 0xff &&
             (buffer[3] & 0xf0) == 0xe0)
+        
         {
             //Close current jpeg file if exists
             if (count > 0)
@@ -55,34 +59,32 @@ int main(int argc, char *argv[])
 
             //Open the new file
             recovered_image = fopen(filename, "w");
+            
 
             if (recovered_image == NULL)
             {
                 fclose(memory);
-                free(buffer);
+                free(filename);
                 return 3;
             }
 
             //Write jpeg into the new file
-            fwrite(&buffer, 512, 1, recovered_image);
+            fwrite(buffer, 512, 1, recovered_image);
 
             count++;
 
         }
 
-        else
+        if (count > 0)
         {
-            //continue;
-            fread(buffer, 512, 1, memory);
+            fwrite(buffer, 512, 1, recovered_image);
         }
-
-
     }
 
     //Close files and free memory
     fclose(memory);
-    fclose(recovered_image);
-    free(buffer);
+    //fclose(recovered_image);
+    free(filename);
     return 0;
 
 }
