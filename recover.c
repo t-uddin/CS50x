@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     unsigned char *buffer = malloc(251);
 
     //Declare image variable where new jpegs are written to
-    FILE *recovered_image;
+    FILE *recovered_image = NULL;
 
     //Scan file for beginning of a JPEG, iterate in bytes of 512
     while (fread(buffer, 512, 1, memory))
@@ -58,11 +58,14 @@ int main(int argc, char *argv[])
                 free(buffer);
                 return 3;
             }
+            else
+            {
+                //Write jpeg into the new file
+                fwrite(buffer, 512, 1, recovered_image);
+            }
 
             count++;
 
-            //Write jpeg into the new file
-            fwrite(buffer, 512, 1, recovered_image);
         }
 
         else
@@ -74,7 +77,6 @@ int main(int argc, char *argv[])
 
     //Close input file and free memory
     fclose(memory);
-    fclose(recovered_image);
     free(buffer);
 
 }
