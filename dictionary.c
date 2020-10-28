@@ -137,9 +137,6 @@ bool unload(void)
             cursor = cursor->next;
             free(temp);
         }
-
-
-        //until cursor->next = NULL
     }
 
     free(cursor);
