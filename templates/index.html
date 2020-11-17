@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+     <table class="table table-striped">
+         <tr>
+             <th>Symbol</th>
+             <th>Name</th>
+             <th>Shares</th>
+             <th>Price</th>
+             <th>Total</th>
+         </tr>
+
+         {% for stock in user_stocks %}
+         <tr>
+             <th>{{ stock.symbol }}</th>
+             <th>{{ stock.name }}</th>
+             <th>{{ stock.shares }}</th>
+             <th>{{ stock.price }}</th>
+             <th>{{ stock.total }}</th>
+         </tr>
+         {% endfor %}
+
+         <!--Footer-->
+         <tr>
+             <td colspan="4"></td>
+             <!--<td> SUM </td>-->
+         </tr>
+     </table>
+{% endblock %}
